@@ -1,145 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Pengu ❤️</title>
+<meta charset="UTF-8">
+<title>Pengu ❤️</title>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(#f8bbd0, #fde4ec);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(#f8bbd0, #fde4ec);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+  }
+
+  .scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* WALKING container */
+  .penguin-walk {
+    position: absolute;
+    left: -150px;
+    bottom: 120px;
+    animation: walk 6s ease-in-out forwards;
+  }
+
+  /* WADDLING body */
+  .penguin {
+    font-size: 64px;
+    white-space: nowrap;
+    animation: waddle 0.5s infinite alternate;
+  }
+
+  .name {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: #444;
+  }
+
+  .rose {
+    display: none;
+    font-size: 42px;
+    margin-left: 10px;
+  }
+
+  .message {
+    position: absolute;
+    top: 18%;
+    width: 100%;
+    text-align: center;
+    font-size: 34px;
+    color: #c2185b;
+    opacity: 0;
+    animation: showMessage 2s ease forwards;
+    animation-delay: 6s;
+  }
+
+  .sparkle {
+    position: absolute;
+    font-size: 20px;
+    animation: sparkle 1.5s ease-out forwards;
+    pointer-events: none;
+  }
+
+  @keyframes walk {
+    0% {
+      transform: translateX(0) scale(0.5);
     }
-
-    .scene {
-      position: relative;
-      width: 100%;
-      height: 100%;
+    100% {
+      transform: translateX(60vw) scale(1.4);
     }
+  }
 
-    .penguin {
-      position: absolute;
-      left: -140px;
-      bottom: 120px;
-      font-size: 64px;
-      white-space: nowrap;
-      animation: walk 6s ease-in-out forwards,
-                 waddle 0.6s infinite alternate;
+  @keyframes waddle {
+    0% { transform: rotate(-6deg); }
+    100% { transform: rotate(6deg); }
+  }
+
+  @keyframes sparkle {
+    0% {
+      opacity: 1;
+      transform: scale(0.5) translateY(0);
     }
-
-    .name {
-      display: block;
-      text-align: center;
-      font-size: 18px;
-      color: #444;
-      margin-top: 4px;
-    }
-
-    .rose {
-      display: none;
-      font-size: 42px;
-      margin-left: 10px;
-    }
-
-    .message {
-      position: absolute;
-      top: 18%;
-      width: 100%;
-      text-align: center;
-      font-size: 34px;
-      color: #c2185b;
+    100% {
       opacity: 0;
-      animation: showMessage 2s ease forwards;
-      animation-delay: 6s;
+      transform: scale(1.5) translateY(-40px);
     }
+  }
 
-    /* Sparkles */
-    .sparkle {
-      position: absolute;
-      font-size: 20px;
-      animation: sparkle 1.5s ease-out forwards;
-      pointer-events: none;
-    }
-
-    @keyframes walk {
-      0% {
-        transform: translateX(0) scale(0.5);
-      }
-      70% {
-        transform: translateX(60vw) scale(1.2);
-      }
-      100% {
-        transform: translateX(60vw) scale(1.4);
-      }
-    }
-
-    @keyframes waddle {
-      0% { transform: rotate(-4deg); }
-      100% { transform: rotate(4deg); }
-    }
-
-    @keyframes sparkle {
-      0% {
-        opacity: 1;
-        transform: scale(0.5) translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1.5) translateY(-40px);
-      }
-    }
-
-    @keyframes showMessage {
-      to { opacity: 1; }
-    }
-  </style>
+  @keyframes showMessage {
+    to { opacity: 1; }
+  }
+</style>
 </head>
+
 <body>
 
-  <div class="scene">
-    <div class="penguin" id="penguin">
+<div class="scene">
+
+  <div class="penguin-walk">
+    <div class="penguin">
       🐧<span class="rose" id="rose">🌹</span>
       <span class="name">Pengu</span>
     </div>
-
-    <div class="message">
-      Pengu brought you a rose 🌹<br>
-      And all my love ❤️
-    </div>
   </div>
 
-  <!-- Romantic music -->
-  <audio id="music" src="carefree.mp3"></audio>
+  <div class="message">
+    Pengu brought you a rose 🌹<br>
+    And all my love ❤️
+  </div>
 
-  <script>
-    const rose = document.getElementById("rose");
-    const music = document.getElementById("music");
-    const scene = document.querySelector(".scene");
+</div>
 
-    setTimeout(() => {
-      rose.style.display = "inline";
-      createSparkles();
-      music.play();
-    }, 5500);
+<audio id="music" src="carefree.mp3"></audio>
 
-    function createSparkles() {
-      for (let i = 0; i < 15; i++) {
-        const sparkle = document.createElement("div");
-        sparkle.className = "sparkle";
-        sparkle.innerText = "✨";
-        sparkle.style.left = (window.innerWidth * 0.6 + Math.random() * 80) + "px";
-        sparkle.style.bottom = (180 + Math.random() * 60) + "px";
-        scene.appendChild(sparkle);
+<script>
+  const rose = document.getElementById("rose");
+  const music = document.getElementById("music");
+  const scene = document.querySelector(".scene");
 
-        setTimeout(() => sparkle.remove(), 1500);
-      }
+  setTimeout(() => {
+    rose.style.display = "inline";
+    music.play();
+    createSparkles();
+  }, 5500);
+
+  function createSparkles() {
+    for (let i = 0; i < 15; i++) {
+      const s = document.createElement("div");
+      s.className = "sparkle";
+      s.innerText = "✨";
+      s.style.left = (window.innerWidth * 0.6 + Math.random() * 80) + "px";
+      s.style.bottom = (200 + Math.random() * 60) + "px";
+      scene.appendChild(s);
+      setTimeout(() => s.remove(), 1500);
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
