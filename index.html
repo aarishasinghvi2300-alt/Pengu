@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Pengu ❤️</title>
+<title>❤️</title>
 
 <style>
   body {
     margin: 0;
     height: 100vh;
     background: linear-gradient(#f8bbd0, #fde4ec);
+    overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    align-items: flex-end;
   }
 
   .scene {
@@ -22,80 +21,113 @@
     height: 100%;
   }
 
-  /* WALKING container */
+  /* WALKING CONTAINER */
   .penguin-walk {
     position: absolute;
-    left: -150px;
     bottom: 120px;
-    animation: walk 6s ease-in-out forwards;
+    left: 50%;
+    transform: translateX(-50%) scale(0.3);
+    animation: walkForward 6s ease-in-out forwards;
   }
 
-  /* WADDLING body */
+  /* PENGUIN BODY */
   .penguin {
-    font-size: 64px;
-    white-space: nowrap;
+    position: relative;
+    width: 120px;
+    height: 160px;
     animation: waddle 0.5s infinite alternate;
   }
 
-  .name {
-    display: block;
-    text-align: center;
-    font-size: 18px;
-    color: #444;
+  .body {
+    width: 120px;
+    height: 160px;
+    background: #2c2c2c;
+    border-radius: 60px 60px 50px 50px;
+    position: relative;
   }
 
-  .rose {
-    display: none;
-    font-size: 42px;
-    margin-left: 10px;
-  }
-
-  .message {
+  .belly {
+    width: 70px;
+    height: 100px;
+    background: white;
+    border-radius: 35px;
     position: absolute;
-    top: 18%;
-    width: 100%;
-    text-align: center;
-    font-size: 34px;
-    color: #c2185b;
-    opacity: 0;
-    animation: showMessage 2s ease forwards;
+    bottom: 15px;
+    left: 25px;
+  }
+
+  .eye {
+    width: 8px;
+    height: 8px;
+    background: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 40px;
+  }
+
+  .eye.left { left: 40px; }
+  .eye.right { right: 40px; }
+
+  .beak {
+    width: 14px;
+    height: 10px;
+    background: orange;
+    border-radius: 0 0 6px 6px;
+    position: absolute;
+    top: 55px;
+    left: 53px;
+  }
+
+  /* FLIPPERS */
+  .flipper {
+    width: 35px;
+    height: 15px;
+    background: #2c2c2c;
+    border-radius: 20px;
+    position: absolute;
+    top: 75px;
+  }
+
+  .flipper.left {
+    left: -20px;
+    transform: rotate(20deg);
+  }
+
+  .flipper.right {
+    right: -20px;
+    transform-origin: left center;
+    animation: giveRose 2s ease forwards;
     animation-delay: 6s;
   }
 
-  .sparkle {
+  /* ROSE */
+  .rose {
+    display: none;
     position: absolute;
-    font-size: 20px;
-    animation: sparkle 1.5s ease-out forwards;
-    pointer-events: none;
+    right: -45px;
+    top: -10px;
+    font-size: 28px;
   }
 
-  @keyframes walk {
+  /* ANIMATIONS */
+  @keyframes walkForward {
     0% {
-      transform: translateX(0) scale(0.5);
+      transform: translateX(-50%) scale(0.3);
     }
     100% {
-      transform: translateX(60vw) scale(1.4);
+      transform: translateX(-50%) scale(1);
     }
   }
 
   @keyframes waddle {
-    0% { transform: rotate(-6deg); }
-    100% { transform: rotate(6deg); }
+    0% { transform: rotate(-5deg); }
+    100% { transform: rotate(5deg); }
   }
 
-  @keyframes sparkle {
-    0% {
-      opacity: 1;
-      transform: scale(0.5) translateY(0);
+  @keyframes giveRose {
+    to {
+      transform: rotate(-20deg) translateX(20px);
     }
-    100% {
-      opacity: 0;
-      transform: scale(1.5) translateY(-40px);
-    }
-  }
-
-  @keyframes showMessage {
-    to { opacity: 1; }
   }
 </style>
 </head>
@@ -103,45 +135,27 @@
 <body>
 
 <div class="scene">
-
   <div class="penguin-walk">
     <div class="penguin">
-      🐧<span class="rose" id="rose">🌹</span>
-      <span class="name">Pengu</span>
+      <div class="body">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="beak"></div>
+        <div class="belly"></div>
+
+        <div class="flipper left"></div>
+        <div class="flipper right">
+          <span class="rose" id="rose">🌹</span>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="message">
-    Pengu brought you a rose 🌹<br>
-    And all my love ❤️
-  </div>
-
 </div>
 
-<audio id="music" src="carefree.mp3"></audio>
-
 <script>
-  const rose = document.getElementById("rose");
-  const music = document.getElementById("music");
-  const scene = document.querySelector(".scene");
-
   setTimeout(() => {
-    rose.style.display = "inline";
-    music.play();
-    createSparkles();
-  }, 5500);
-
-  function createSparkles() {
-    for (let i = 0; i < 15; i++) {
-      const s = document.createElement("div");
-      s.className = "sparkle";
-      s.innerText = "✨";
-      s.style.left = (window.innerWidth * 0.6 + Math.random() * 80) + "px";
-      s.style.bottom = (200 + Math.random() * 60) + "px";
-      scene.appendChild(s);
-      setTimeout(() => s.remove(), 1500);
-    }
-  }
+    document.getElementById("rose").style.display = "inline";
+  }, 6000);
 </script>
 
 </body>
