@@ -5,130 +5,158 @@
 <title>❤️</title>
 
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(#f8bbd0, #fde4ec);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(#f8bbd0, #fde4ec);
+  overflow: hidden;
+}
 
-  .scene {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-  /* WALKING CONTAINER */
-  .penguin-walk {
-    position: absolute;
-    bottom: 120px;
-    left: 50%;
+/* WALKING CONTAINER */
+.penguin-walk {
+  position: absolute;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.3);
+  animation: moveForward 6s ease-in-out forwards;
+}
+
+/* PENGUIN */
+.penguin {
+  position: relative;
+  width: 140px;
+  animation: bodyWaddle 0.6s infinite alternate;
+}
+
+/* BODY */
+.body {
+  width: 140px;
+  height: 180px;
+  background: #222;
+  border-radius: 70px 70px 55px 55px;
+  position: relative;
+}
+
+.belly {
+  width: 85px;
+  height: 120px;
+  background: #fff;
+  border-radius: 42px;
+  position: absolute;
+  bottom: 20px;
+  left: 28px;
+}
+
+/* FACE */
+.eye {
+  width: 10px;
+  height: 10px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50px;
+}
+
+.eye.left { left: 45px; }
+.eye.right { right: 45px; }
+
+.beak {
+  width: 18px;
+  height: 14px;
+  background: orange;
+  border-radius: 0 0 8px 8px;
+  position: absolute;
+  top: 65px;
+  left: 61px;
+}
+
+/* FLIPPERS */
+.flipper {
+  width: 45px;
+  height: 18px;
+  background: #222;
+  border-radius: 20px;
+  position: absolute;
+  top: 85px;
+}
+
+.flipper.left {
+  left: -28px;
+  transform: rotate(20deg);
+}
+
+.flipper.right {
+  right: -28px;
+  transform-origin: left center;
+  animation: giveRose 2s ease forwards;
+  animation-delay: 6s;
+}
+
+/* LEGS */
+.legs {
+  position: absolute;
+  bottom: -22px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 35px;
+}
+
+.leg {
+  width: 18px;
+  height: 25px;
+  background: orange;
+  border-radius: 8px;
+}
+
+.leg.left {
+  animation: legWalk 0.6s infinite;
+}
+
+.leg.right {
+  animation: legWalk 0.6s infinite reverse;
+}
+
+/* ROSE */
+.rose {
+  display: none;
+  position: absolute;
+  right: -70px;
+  top: -25px;
+  font-size: 50px;
+}
+
+/* ANIMATIONS */
+@keyframes moveForward {
+  from {
     transform: translateX(-50%) scale(0.3);
-    animation: walkForward 6s ease-in-out forwards;
   }
-
-  /* PENGUIN BODY */
-  .penguin {
-    position: relative;
-    width: 120px;
-    height: 160px;
-    animation: waddle 0.5s infinite alternate;
+  to {
+    transform: translateX(-50%) scale(1);
   }
+}
 
-  .body {
-    width: 120px;
-    height: 160px;
-    background: #2c2c2c;
-    border-radius: 60px 60px 50px 50px;
-    position: relative;
+@keyframes bodyWaddle {
+  from { transform: rotate(-4deg); }
+  to { transform: rotate(4deg); }
+}
+
+@keyframes legWalk {
+  from { transform: translateY(0); }
+  to { transform: translateY(8px); }
+}
+
+@keyframes giveRose {
+  to {
+    transform: rotate(-25deg) translateX(25px);
   }
-
-  .belly {
-    width: 70px;
-    height: 100px;
-    background: white;
-    border-radius: 35px;
-    position: absolute;
-    bottom: 15px;
-    left: 25px;
-  }
-
-  .eye {
-    width: 8px;
-    height: 8px;
-    background: black;
-    border-radius: 50%;
-    position: absolute;
-    top: 40px;
-  }
-
-  .eye.left { left: 40px; }
-  .eye.right { right: 40px; }
-
-  .beak {
-    width: 14px;
-    height: 10px;
-    background: orange;
-    border-radius: 0 0 6px 6px;
-    position: absolute;
-    top: 55px;
-    left: 53px;
-  }
-
-  /* FLIPPERS */
-  .flipper {
-    width: 35px;
-    height: 15px;
-    background: #2c2c2c;
-    border-radius: 20px;
-    position: absolute;
-    top: 75px;
-  }
-
-  .flipper.left {
-    left: -20px;
-    transform: rotate(20deg);
-  }
-
-  .flipper.right {
-    right: -20px;
-    transform-origin: left center;
-    animation: giveRose 2s ease forwards;
-    animation-delay: 6s;
-  }
-
-  /* ROSE */
-  .rose {
-    display: none;
-    position: absolute;
-    right: -45px;
-    top: -10px;
-    font-size: 28px;
-  }
-
-  /* ANIMATIONS */
-  @keyframes walkForward {
-    0% {
-      transform: translateX(-50%) scale(0.3);
-    }
-    100% {
-      transform: translateX(-50%) scale(1);
-    }
-  }
-
-  @keyframes waddle {
-    0% { transform: rotate(-5deg); }
-    100% { transform: rotate(5deg); }
-  }
-
-  @keyframes giveRose {
-    to {
-      transform: rotate(-20deg) translateX(20px);
-    }
-  }
+}
 </style>
 </head>
 
@@ -147,6 +175,11 @@
         <div class="flipper right">
           <span class="rose" id="rose">🌹</span>
         </div>
+      </div>
+
+      <div class="legs">
+        <div class="leg left"></div>
+        <div class="leg right"></div>
       </div>
     </div>
   </div>
